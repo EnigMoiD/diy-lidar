@@ -19,15 +19,22 @@ void setup() {
 }
 
 void outputData(int count) {
+  int total = 0;
+
   Serial.println("Data points");
   Serial.println("--------------------");
   for (int i = 0; i < count; i ++) {
     sensorValue = analogRead(analogInPin);
 
+    total += sensorValue;
+
     Serial.println(sensorValue);
 
     delay(2);
   }
+  Serial.println("Average");
+  Serial.println("--------------------");
+  Serial.println(total/count);
   Serial.println("====================");
 }
 
