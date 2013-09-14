@@ -40,8 +40,6 @@ void outputData(int count) {
 
     total += sensorValue;
 
-    Serial.println(sensorValue);
-
     delay(2);
   }
   Serial.print(total/count);
