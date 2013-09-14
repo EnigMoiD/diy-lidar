@@ -1,10 +1,8 @@
 const int analogInPin = A0;
-const int analogOutPin = 9;
 
 long currentMillis = 0;
 
-int sensorValue = 0;
-int outputValue = 0;
+int dataCount = 0;
 
 // Button stuff
 int lastButtonState = 0;
@@ -21,10 +19,8 @@ void setup() {
 void outputData(int count) {
   int total = 0;
 
-  Serial.println("Data points");
-  Serial.println("--------------------");
   for (int i = 0; i < count; i ++) {
-    sensorValue = analogRead(analogInPin);
+    int sensorValue = analogRead(analogInPin);
 
     total += sensorValue;
 
@@ -32,10 +28,9 @@ void outputData(int count) {
 
     delay(2);
   }
-  Serial.println("Average");
-  Serial.println("--------------------");
+  Serial.println(dataCount);
   Serial.println(total/count);
-  Serial.println("====================");
+  dataCount++;
 }
 
 void loop() { 
