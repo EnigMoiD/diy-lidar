@@ -27,68 +27,67 @@ const int termCount = 5;
 float ps[termCount] = {6.1135*pow(10, -9), -1.0478e-05, 0.006638, -1.9374, 259.27};
 
 float processedRange() {
-  int raw = analogRead(analogInPin);
-  float retRange = 0;
-  for (int i = 0; i < termCount; i++) {
-    retRange += ps[i]*pow(raw, termCount-1-i);
-  }
-  return retRange;
+	int raw = analogRead(analogInPin);
+	float retRange = 0;
+	for (int i = 0; i < termCount; i++) {
+		retRange += ps[i]*pow(raw, termCount-1-i);
+	}
+	return retRange;
 }
 
 float averagedRange(int count) {
-  float total = 0;
+	float total = 0;
 
-  for (int i = 0; i < count; i ++) {
-    float sensorValue = processedRange();
+	for (int i = 0; i < count; i ++) {
+		float sensorValue = processedRange();
 
-    total += sensorValue;
+		total += sensorValue;
 
-    delay(2);
-  }
+		delay(2);
+	}
 
-  return total/count;
+	return total/count;
 }
 
 void printPoint(float R, float phi, float theta) {
-  // Radius
-  Serial.println(R);
-  // Servo 0 phi
-  Serial.println(phi);
-  // Servo 1 theta
-  Serial.println(theta);
+	// Radius
+	Serial.println(R);
+	// Servo 0 phi
+	Serial.println(phi);
+	// Servo 1 theta
+	Serial.println(theta);
 }
 
-void setup()
-{
-  for (int i = 0; i < servoCount; i++) {
-    Servo servo;
-    servos[i] = servo;
-    servo.attach((i*2)+9);
-  }
+void setup() {
+	for (int i = 0; i < servoCount; i++) {
+		Servo servo;
+		servos[i] = servo;
+		servo.attach((i*2)+9);
+	}
 
-  // Setup range
-  Serial.begin(9600);
+	// Setup range
+	Serial.begin(9600);
 
-  pinMode(buttonPin, INPUT);
+	pinMode(buttonPin, INPUT);
 }
 
 void loop() {
-    loopServo();
+	loopServo();
 }
 
 void loopServo() {
-  for(pos = 0; pos < 180; pos += 1) {
-    for (int i = 0; i < servoCount; i++) {
-      servos[i].write(pos);
-      printPoint(averagedRange(10), pos, 2);
-    }
-    delay(15);
-  }
-  for(pos = 180; pos>=1; pos-=1) {
-    for (int i = 0; i < servoCount; i++) {
-      servos[i].write(pos);
-      printPoint(averagedRange(10), pos, 2);
-    }
-    delay(15);
-  }
+	for(pos = 0; pos < 180; pos += 1) {
+		for (int i = 0; i < servoCount; i++) {
+			servos[i].write(pos);
+			printPoint(averagedRange(10), pos, 2);
+		}
+		delay(15);
+	}
+	for(pos = 180; pos>=1; pos-=1) {
+		for (int i = 0; i < servoCount; i++) {
+			servos[i].write(pos);
+			printPoint(averagedRange(10), pos, 2);
+		}
+		delay(15);
+	}
 }
