@@ -20,6 +20,8 @@ try
 
         i=i+1;
     end
+    theta = theta.*(pi/180);
+    phi  = phi.*(pi/180);
     % cart = sph2cart(phi, theta, R);
     phi
     R
