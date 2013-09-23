@@ -63,6 +63,8 @@ void setup() {
 		servo.attach((i*2)+9);
 	}
 
+	setupServo();
+
 	// Setup range
 	Serial.begin(9600);
 
@@ -73,15 +75,22 @@ void loop() {
 	loopServo();
 }
 
+void setupServo() {
+	servos[0].write(0);
+	servos[1].write(60);
+	delay(1000);
+}
+
 void loopServo() {
-	for(int phi = 0; phi < 180; phi += 10) {
+	for(int phi = 0; phi < 110; phi += 1) {
 		servos[0].write(phi);
-		for(int theta = 0; theta < 180; theta += 10) {
+		delay(500);
+		servos[1].write(45);
+		delay(500);
+		for(int theta = 45; theta < 110; theta += 1) {
 			servos[1].write(theta);
 			printPoint(averagedRange(10), phi, theta);
-			delay(5);
+			delay(300);
 		}
-		delay(5);
-
 	}
 }
