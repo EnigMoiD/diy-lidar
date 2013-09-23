@@ -13,7 +13,7 @@ set(s1, 'terminator', 'LF');
 fopen(s1);
 
 try
-	thetaoffset = 90;
+	thetaoffset = 103;
 	phioffset = 45;
 	i = 1;
 	j = 1;
