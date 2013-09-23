@@ -26,9 +26,9 @@ try
 		theta = theta.*(pi/180);
 		phi  = phi.*(pi/180);
 
-		x = rho*sin(phi)*cos(theta);
+		x = rho*cos(phi)*sin(theta);
 		y = rho*sin(phi)*sin(theta);
-		z = rho*cos(phi);
+		z = rho*cos(theta);
 
 		X(i, j) = x;
 		Y(i, j) = y;
