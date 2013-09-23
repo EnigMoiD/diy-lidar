@@ -1,10 +1,8 @@
 #include <Servo.h>
 
 // Servo variables
-const int servoCount = 1;
+const int servoCount = 2;
 Servo servos[servoCount];
-
-int pos = 0;
 
 // Range variables
 const int analogInPin = A0;
@@ -76,18 +74,14 @@ void loop() {
 }
 
 void loopServo() {
-	for(pos = 0; pos < 180; pos += 1) {
-		for (int i = 0; i < servoCount; i++) {
-			servos[i].write(pos);
-			printPoint(averagedRange(10), pos, 2);
+	for(int phi = 0; phi < 180; phi += 10) {
+		servos[0].write(phi);
+		for(int theta = 0; theta < 180; theta += 10) {
+			servos[1].write(theta);
+			printPoint(averagedRange(10), phi, theta);
+			delay(5);
 		}
-		delay(15);
-	}
-	for(pos = 180; pos>=1; pos-=1) {
-		for (int i = 0; i < servoCount; i++) {
-			servos[i].write(pos);
-			printPoint(averagedRange(10), pos, 2);
-		}
-		delay(15);
+		delay(5);
+
 	}
 }

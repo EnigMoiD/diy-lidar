@@ -6,26 +6,40 @@ numSec=1;
 t=[];
 v=[];
 
-s1 = serial('/dev/tty.usbmodem1421');    % define serial port
+s1 = serial('/dev/tty.usbmodem1411');    % define serial port
 s1.BaudRate=9600;
 set(s1, 'terminator', 'LF');
 fopen(s1);
 
 try
-	i=1;
-	while i < 100
-		R(i) = fscanf(s1,'%f');
-		phi(i) = fscanf(s1,'%f');
-		theta(i) = fscanf(s1,'%f');
+	i = 1;
+	j = 1;
+	while j < 10
+		rho = fscanf(s1,'%f');
+		phi = fscanf(s1,'%f');
+		theta = fscanf(s1,'%f');
+
+		if (theta == 0)
+			j=j+1;
+			i=1;
+		end
+
+		theta = theta.*(pi/180);
+		phi  = phi.*(pi/180);
+
+		x = rho*sin(phi)*cos(theta);
+		y = rho*sin(phi)*sin(theta);
+		z = rho*cos(phi);
+
+		X(i, j) = x;
+		Y(i, j) = y;
+		Z(i, j) = z;
 
 		i=i+1;
 	end
-	theta = theta.*(pi/180);
-	phi  = phi.*(pi/180);
-	% cart = sph2cart(phi, theta, R);
-	phi
-	R
-	polar(phi, R);
+
+	surf(X, Y, Z);
+	grid on
 	fclose(s1);
 catch exception
 	fclose(s1);
