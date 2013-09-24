@@ -1,0 +1,11 @@
+
+clf
+Xs = Xs(:, 2:end);
+Xs = Ys(:, 2:end);
+Xs = Zs(:, 2:end);
+for i = 1:numel(Xs)
+    D(i) = sqrt(Xs(i)^2+Ys(i)^2+Zs(i)^2);
+end
+
+scatter3(Xs, Ys, Zs, 50, D, 'fill')
+camproj('perspective')
