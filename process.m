@@ -13,11 +13,12 @@ set(s1, 'terminator', 'LF');
 fopen(s1);
 
 try
-	thetaoffset = 103;
+	thetaoffset = 90;
 	phioffset = 45;
 	i = 1;
 	j = 1;
-	while j < 110
+	k = 1;
+	while j < 20
 		rho = fscanf(s1,'%f')
 		phi = fscanf(s1,'%f') + phioffset
 		datatheta = fscanf(s1,'%f');
@@ -26,15 +27,20 @@ try
 		theta = theta.*(pi/180);
 		phi  = phi.*(pi/180);
 
-		x = rho*cos(phi)*sin(theta);
-		y = rho*sin(phi)*sin(theta);
-		z = rho*cos(theta);
+		Rho(k) = rho;
+		Phi(k) = phi;
+		Theta(k) = theta;
+
+		x = rho*cos(phi)*cos(theta);
+		y = rho*sin(phi)*cos(theta);
+		z = rho*sin(theta);
 
 		X(i, j) = x;
 		Y(i, j) = y;
 		Z(i, j) = z;
 
 		i=i+1;
+		k=k+1;
 
 		if (datatheta == 45)
 			j=j+1;

@@ -82,15 +82,16 @@ void setupServo() {
 }
 
 void loopServo() {
-	for(int phi = 0; phi < 110; phi += 1) {
+	for(int phi = 0; phi < 110; phi += 3) {
 		servos[0].write(phi);
 		delay(500);
 		servos[1].write(45);
 		delay(500);
-		for(int theta = 45; theta < 110; theta += 1) {
+		for(int theta = 45; theta < 90; theta += 3) {
 			servos[1].write(theta);
+			delay(200);
 			printPoint(averagedRange(10), phi, theta);
-			delay(300);
+			delay(100);
 		}
 	}
 }
