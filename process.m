@@ -13,12 +13,12 @@ set(s1, 'terminator', 'LF');
 fopen(s1);
 
 try
-	thetaoffset = 90;
-	phioffset = 45;
+	thetaoffset = 97;
+	phioffset = 60;
 	i = 1;
 	j = 1;
 	k = 1;
-	while j < 20
+	while j < 70
 		rho = fscanf(s1,'%f')
 		phi = fscanf(s1,'%f') + phioffset
 		datatheta = fscanf(s1,'%f');
@@ -42,7 +42,7 @@ try
 		i=i+1;
 		k=k+1;
 
-		if (datatheta == 45)
+		if (datatheta == 25)
 			j=j+1;
 			i=1;
 			disp 'New loop!';
