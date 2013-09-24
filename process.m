@@ -42,7 +42,7 @@ try
 		i=i+1;
 		k=k+1;
 
-		if (datatheta == 55 && k!=2)
+		if (datatheta == 30)
 			j=j+1;
 			i=1;
 			disp 'New loop!';
